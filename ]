@@ -1,0 +1,18 @@
+export PATH="$PATH:/usr/local/bin/games"
+export XDG_CONFIG_HOME=~/.config
+export EDITOR="nvim"
+alias ls="exa --icons"
+alias "cd.."="cd .."
+alias cat=bat
+alias cls="clear"
+alias ip="curl ifconfig.me"
+alias hdd1="cd /media/hdd1"
+alias du=dust
+#alias "git commit '$1'"="git commit -S -m '$1'"
+alias vim=nvim
+eval "$(starship init zsh)"
+export WINEESYNC=1
+export WINEFSYNC=1
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export GPG_TTY=$(tty)
