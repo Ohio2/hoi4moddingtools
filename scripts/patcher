@@ -4,3 +4,6 @@ function patcher(){
 	echo "$1" >> $2
 	cat $2
 }
+function sedpatcher(){
+	sed -i "s|$2|$3" $1
+}

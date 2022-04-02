@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-./png2
+. ./png2
 function inpng(){
 	cp $1 $1_small.png
 	cp $1 $1_medium.png
@@ -17,3 +17,7 @@ function flagmaker_large(){
 	png2res 82x52 $1
 	png2tga $1
 }
+inpng
+flagmaker_small
+flagmaker_medium
+flagmaker_large
