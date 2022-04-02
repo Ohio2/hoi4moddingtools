@@ -1,0 +1,11 @@
+#!/bin/bash
+set -x
+function png2res(){
+	magick -resize $2 $1.png
+}
+function png2dds(){
+	magick $1.png $1.dds
+}
+function png2tga(){
+	magick $1.png $1.tga
+}
