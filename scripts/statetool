@@ -1,0 +1,35 @@
+#!/bin/bash
+. ./patcher
+function main() {
+	echo "If you haven't, export those variables: MP, O, CR (if empty, automatically cored by O), CL (optional), OP, SL, CIV (optional), MIL (optional)"
+	echo "Checking variables..."
+	set -x
+	if [ -z $MP ]; then 
+		exit 1
+	fi
+	if [ -z $O ]; then
+                exit 1
+        fi
+	if [ -z $OP ]; then
+                exit 1
+        fi
+	if [ -z $SL ]; then
+                exit 1
+        fi
+	#if [ -z $CIV ]; then
+        #        exit 1
+        #fi
+	#if [ -z $MIL ]; then
+        #        exit 1
+        #fi
+	#if [ -z $CR ]; then
+		CR=$O
+	fi
+	echo "OK."
+	sedpatcher "manpower=0" "manpower=$MP" "$1"
+	echo "OK."
+	patcher "history = { owner = $O add_core_of = $CR"
+	echo "OK."
+
+}
+main
