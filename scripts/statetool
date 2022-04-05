@@ -1,7 +1,7 @@
 #!/bin/bash
 . ./patcher
 function main() {
-	echo "If you haven't, export those variables: MP, O, CR (if empty, automatically cored by O), CL (optional), OP, SL, CIV (optional), MIL (optional)"
+	echo "If you haven't, export those variables: MP, O, CR (if empty, automatically cored by O), CL (optional), OP (optional), SL, CIV (optional), MIL (optional)"
 	echo "Checking variables..."
 	set -x
 	if [ -z $MP ]; then 
@@ -9,10 +9,7 @@ function main() {
 	fi
 	if [ -z $O ]; then
                 exit 1
-        fi
-	if [ -z $OP ]; then
-                exit 1
-        fi
+        fi	
 	if [ -z $SL ]; then
                 exit 1
         fi
@@ -22,14 +19,27 @@ function main() {
 	#if [ -z $MIL ]; then
         #        exit 1
         #fi
-	#if [ -z $CR ]; then
+	if [ -z $CR ]; then
 		CR=$O
 	fi
 	echo "OK."
 	sedpatcher "manpower=0" "manpower=$MP" "$1"
-	echo "OK."
-	patcher "history = { owner = $O add_core_of = $CR"
-	echo "OK."
-
+	patcher "state_category = $SL" "$1"
+	patcher "history = { owner = $O add_core_of = $CR" "$1"
+	if [ ! -z $OP ]; then
+		patcher "controller = $OP" "$1"
+	fi
+	if [ ! -z $CL ]; then
+		patcher "add_claim_by = $CL" "$1"
+	fi
+	if [ ! -z $CIV ]; then
+		patcher "industrial_complex = $CIV" "$1"
+	fi
+	if [ ! -z $MIL ]; then
+		patcher "arms_factory = $MIL" "$1"
+	fi
+	patcher "}" "$1"
+	echo "OK. Done."
+	exit 0
 }
 main
