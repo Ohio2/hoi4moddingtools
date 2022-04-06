@@ -1,0 +1,11 @@
+#!/bin/bash
+set -x 
+echo "Do not use currently!" >/dev/null
+pushd
+cd ./scripts
+case $1 in 
+	"-s") ./statetool $2 ;;
+	"-f") ./flagmaker $2 ;;
+esac
+popd
+
